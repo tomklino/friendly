@@ -11,16 +11,17 @@ unsigned long calculateFriend(unsigned long candidate) {
   return sum;
 }
 
-unsigned long main(unsigned long argc, char *argv[]) {
-  unsigned long bigCandidate, smallCandidate, maxSearch;
+int main(unsigned long argc, char *argv[]) {
+  unsigned long candidate, mate, maxSearch;
   char *endptr;
   maxSearch = strtoul(argv[1], &endptr, 10);
-  for (bigCandidate = 1; bigCandidate < maxSearch; bigCandidate++) {
-    smallCandidate = calculateFriend(bigCandidate);
-    if (smallCandidate >= bigCandidate)
+  for (candidate = 1; candidate < maxSearch; candidate++) {
+    mate = calculateFriend(candidate);
+    if (mate <= candidate)
       continue;
-    if(calculateFriend(smallCandidate) == bigCandidate) {
-      printf("%lu %lu\n", smallCandidate, bigCandidate);
+    if(calculateFriend(mate) == candidate) {
+      printf("%lu %lu\n", candidate, mate);
     }
   }
+  return 0;
 }
